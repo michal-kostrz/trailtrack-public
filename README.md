@@ -2,34 +2,40 @@
 
 TrailTrack is a training project from the 10xdevs course.
 
-The app is designed to generate 3D route previews from `.gpx` files exported by sport watches (for example Garmin). Users upload GPS tracks, process them, and customize how the camera moves along the route. The camera is going to follow a highlighted point that travels along the trail, and orbits around it. By default, the camera should follow the point, like in car navigation app.
-The preview is displayed in an interactive preview component, with UI controls allowing to navigate forwards and backwards along the track, establishing keyframes for the camera movement, and using presets for 2 or 3 camera behaviors.
-The application is accessible from a web browser.
+For hobby hikers, runners, and cyclists, TrailTrack turns a `.gpx` file into an immersive 3D flythrough of the route — the path only, not activity analytics. Upload a track from a sport watch or route planner and relive or preview the trail without a paid subscription or a flat 2D map.
 
-## What It Does
+## MVP (v1)
 
-- Allows users to create an account and log in
-- Import `.gpx` tracks from sport watch activities
-- Build a 3D visualization of the route
-- Animate camera movement along the path
-- Let users tune camera behavior (speed, angle, rotation, timing)
-- Stores the project details in a format that allows easy integration with a 3D rendering library used in the interactive preview
-- Nice to have: a chart showing height above sea level on the course of the track, synchronized with the 3D preview
+- Sign up, sign in, and sign out (email + password)
+- Upload a `.gpx` file from the device; each upload creates a private preview project
+- Same-session 3D preview: route as a 3D curve with a highlighted point auto-moving forward along it
+- Scrub the playback timeline to jump anywhere; releasing resumes forward play from that position
+- Camera defaults to a navigation-style follow view (behind and above the point, trail ahead visible); drag/orbit/zoom to reposition freely; reset view restores follow
+- My Projects list to reopen any saved preview
+- Web app for desktop browsers (latest two major versions of Chrome, Edge, Firefox, Safari)
 
-## What it does not (in the early development phase)
+## Not planned
 
-- Include the points of interest or other details of the track other than the route itself
-- Analyze the performance or fitness ratings reported by the sport watch
-- Integrate with external systems in order to fetch additional information about the users and their activities
-- Render the 3D model of terrain
+- Points of interest, waypoints, photos, or other per-point metadata beyond the route
+- Performance, fitness, or biometric analysis (pace, heart rate, training metrics, etc.)
+- External integrations (Strava, Garmin Connect, OAuth import, activity sync)
+- URL or paste-based GPX import (device upload only)
 
-## Typical Flow
+## Planned for v2
 
-1. Upload a `.gpx` file
-2. Parse and process GPS track data
-3. Render a 3D preview of the route
-4. Configure camera movement settings
-5. Export or share the final preview
+- Playback controls beyond scrub: play/pause, step forward/back, reverse auto-play
+- Camera tuning, keyframe authoring, and multiple presets (e.g. orbit vs follow)
+- Share previews with non-account-holders (read-only links)
+- Delete projects from My Projects
+- Elevation profile chart synced with playback
+
+## Typical flow
+
+1. Sign in or register
+2. Upload a `.gpx` file
+3. View the 3D preview in the same browser session
+4. Scrub the timeline and adjust the camera; use reset view to return to follow mode
+5. Reopen the project later from My Projects
 
 ## Open ends
 
@@ -37,20 +43,12 @@ The application is accessible from a web browser.
 - It should be possible to add a 3D model of the terrain later
 - It should be possible to use the output directly, or convert it to a format that can be an input for a video renderer (a video composed from the 3D terrain model, the track and the camera movement customizations)
 
-## TODO: Decide Tech Stack
+## Success criteria
 
-- [ ] Frontend framework
-- [ ] 3D engine
-- [ ] GPX parsing strategy/library
-- [ ] Backend runtime
-- [ ] Storage for uploads and processed projects
-- [ ] Queue/background jobs for processing
-- [ ] Authentication approach
-- [ ] Deployment target
+- A signed-in user can upload a `.gpx` file and see a 3D preview in the same session, with the highlighted point auto-animating along the trail and the camera in the default follow view
+- The user can scrub the timeline, freely reposition the camera, and reset view to re-engage follow mode
+- Uploaded tracks and projects remain private to the account
 
-## Criteria of success
+## Foundation docs
 
-- A user is able to access the application on the internet, create an account and log in
-- A user can upload a .gpx file and see a preview of the route
-- A user can navigate the camera along the route forwards and backwards, seeing a highlighted point moving along it
-- The basic experience is like when using a car navigation application, seeing a the highlighted point from behind and above (with some part of the trail ahead also visible)
+Full product spec: [`context/foundation/prd.md`](context/foundation/prd.md)
