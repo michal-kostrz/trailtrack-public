@@ -1,3 +1,5 @@
 {
-  "claudeCode.useTerminal": true
+  "claudeCode.useTerminal": true,
+  "files.eol": "\r\n",
+  "prettier.endOfLine": "crlf"
 }
