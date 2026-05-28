@@ -1,6 +1,6 @@
-# Rules for AI
+# CLAUDE.md
 
-This file provides guidance to AI Agent when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Commands
 
@@ -37,9 +37,12 @@ Full server-side rendering (`output: "server"` in astro.config.mjs). All pages a
 - **shadcn/ui**: components live in `src/components/ui/`, "new-york" style variant. Install new ones with `npx shadcn@latest add [name]`.
 - **API routes**: use uppercase `GET`, `POST` exports; validate input with zod.
 - **Supabase migrations**: `supabase/migrations/` using naming format `YYYYMMDDHHmmss_short_description.sql`. Always enable RLS on new tables with granular per-operation, per-role policies.
-- **React**: no Next.js directives ("use client" etc.). Extract hooks to `src/components/hooks/`.
+- **React**: no Next.js directives ("use client" etc.). Extract hooks to `src/components/hooks/`. Components must be React Compiler-compatible (`react-compiler/react-compiler` is enforced as ESLint `error`) — avoid mutable captured variables and unstable hook dependencies.
 - **Services/helpers** go in `src/lib/` (or `src/lib/services/` for extracted business logic).
 - **Shared types** (entities, DTOs) go in `src/types.ts`.
+- **Line endings**: CRLF enforced by Prettier (`"endOfLine": "crlf"` in `.prettierrc.json`). Always create files with CRLF on this project.
+- **Print width**: 120 characters (Prettier default for this project is not 80).
+- **ESLint config**: v9 flat config in `eslint.config.js` — not `.eslintrc*`.
 
 ### Environment
 
@@ -51,4 +54,8 @@ Full server-side rendering (`output: "server"` in astro.config.mjs). All pages a
 
 ## CI
 
-GitHub Actions workflow (`.github/workflows/ci.yml`) runs lint + build on every push and PR to master. Requires `SUPABASE_URL` and `SUPABASE_KEY` repository secrets for the build step.
+GitHub Actions workflow (`.github/workflows/ci.yml`) runs lint + build on every push and PR to master. Requires `SUPABASE_URL` and `SUPABASE_KEY` repository secrets for the build step. No test framework is configured (no vitest, jest, or playwright).
+
+## Lessons learned
+
+See `context/foundation/lessons.md`
